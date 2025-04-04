@@ -1,0 +1,29 @@
+name: ci
+
+on:
+  workflow_dispatch:
+    inputs:
+      library:
+        type: choice
+        description: library
+        options:
+          - xyz
+          - foo
+          - bar
+        required: false
+  schedule:
+    - cron: '* * * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    if: github.event.inputs.library == 'xyz' || github.event.inputs.library == ''
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo
