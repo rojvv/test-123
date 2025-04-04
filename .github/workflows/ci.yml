@@ -11,6 +11,7 @@ on:
           - foo
           - bar
         required: false
+        default: ''
   schedule:
     - cron: '* * * * *'
 
